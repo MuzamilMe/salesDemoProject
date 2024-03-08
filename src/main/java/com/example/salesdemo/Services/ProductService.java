@@ -16,6 +16,7 @@ public interface ProductService {
     ResponseEntity<Object> findById(int id) throws UserException;
 
     ResponseEntity<Object> productsByCategory(String Category);
+    ResponseEntity<Object> findByName(String name);
 
     ResponseEntity<Object> findProductsBylessQty(int qty);
 

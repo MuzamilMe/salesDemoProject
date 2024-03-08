@@ -28,7 +28,10 @@ public class ProductController {
     public ResponseEntity<Object> delete(@PathVariable String name) throws UserException {
         return service.delete(name);
     }
-
+    @GetMapping(value = "/getByName/{name}")
+    public ResponseEntity<Object> getByName(@PathVariable String name) {
+        return service.findByName(name);
+    }
     @PutMapping(value = "/update")
     public ResponseEntity<Object> update(@ModelAttribute ProductDTO dto) throws UserException {
         return service.update(dto);

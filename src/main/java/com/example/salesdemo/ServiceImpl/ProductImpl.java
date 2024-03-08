@@ -48,7 +48,7 @@ public class ProductImpl implements ProductService {
         }
         Product entity = productRepository.findProductsByName(dto.getName());
         System.out.println(entity.toString());
-        if (entity == null) {
+        if (entity.getName() == null) {
             throw new UserException(dto.getName() + " Not found");
         }
         dto = ProductTransformer.toDTO(productRepository.save(ProductTransformer.toUpdate(entity, dto)));
@@ -62,7 +62,7 @@ public class ProductImpl implements ProductService {
     }
 
     @Override
-    public ResponseEntity<Object> findById(int id) throws UserException {
+    public ResponseEntity<Object> findById(int id) {
         return ResponseUtil.returnResponse(new StatusDto(StatusEnum.SUCCESS, "Product found with id "+id, productRepository.findById(id)));
     }
 
@@ -87,6 +87,15 @@ public class ProductImpl implements ProductService {
             return ResponseUtil.returnResponse(new StatusDto(StatusEnum.SUCCESS, "No product is found in " + category, null));
         }
         return ResponseUtil.returnResponse(new StatusDto(StatusEnum.SUCCESS, "products are found in " + category, list));
+    }
+
+    @Override
+    public ResponseEntity<Object> findByName(String name) {
+        Product product = productRepository.findProductsByName(name);
+         if(product==null){
+             return ResponseUtil.returnResponse(new StatusDto(StatusEnum.SUCCESS, name+ " not found" , null));
+         }
+        return ResponseUtil.returnResponse(new StatusDto(StatusEnum.SUCCESS, "products are found", product));
     }
 
     @Override
