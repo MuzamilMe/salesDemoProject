@@ -47,7 +47,6 @@ public class ProductImpl implements ProductService {
             throw new UserException("Missing params");
         }
         Product entity = productRepository.findProductsByName(dto.getName());
-        System.out.println(entity.toString());
         if (entity.getName() == null) {
             throw new UserException(dto.getName() + " Not found");
         }
@@ -62,8 +61,9 @@ public class ProductImpl implements ProductService {
     }
 
     @Override
-    public ResponseEntity<Object> findById(int id) {
-        return ResponseUtil.returnResponse(new StatusDto(StatusEnum.SUCCESS, "Product found with id "+id, productRepository.findById(id)));
+    public Product findById(int id) throws UserException {
+        Product product = productRepository.findById(id).orElseThrow(()->new UserException("not found"));
+      return product;
     }
 
     @Override
@@ -90,12 +90,12 @@ public class ProductImpl implements ProductService {
     }
 
     @Override
-    public ResponseEntity<Object> findByName(String name) {
+    public Product findByName(String name) {
         Product product = productRepository.findProductsByName(name);
-         if(product==null){
-             return ResponseUtil.returnResponse(new StatusDto(StatusEnum.SUCCESS, name+ " not found" , null));
-         }
-        return ResponseUtil.returnResponse(new StatusDto(StatusEnum.SUCCESS, "products are found", product));
+//        if (product == null) {
+//            return ResponseUtil.returnResponse(new StatusDto(StatusEnum.SUCCESS, name + " not found", null));
+//        }
+        return product;
     }
 
     @Override

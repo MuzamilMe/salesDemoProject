@@ -5,6 +5,7 @@ import com.example.salesdemo.Commons.utils.ResponseUtil;
 import com.example.salesdemo.DTO.ProductDTO;
 import com.example.salesdemo.DTO.WrapperDTO;
 import com.example.salesdemo.Services.ProductService;
+import com.example.salesdemo.entities.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +30,7 @@ public class ProductController {
         return service.delete(name);
     }
     @GetMapping(value = "/getByName/{name}")
-    public ResponseEntity<Object> getByName(@PathVariable String name) {
+    public Product getByName(@PathVariable String name) {
         return service.findByName(name);
     }
     @PutMapping(value = "/update")
@@ -53,7 +54,7 @@ public class ProductController {
     }
 
     @GetMapping("/getById/{id}")
-    public ResponseEntity<Object> getById(@PathVariable int id) throws UserException {
+    public Product getById(@PathVariable int id) throws UserException {
         return service.findById(id);
     }
 }
