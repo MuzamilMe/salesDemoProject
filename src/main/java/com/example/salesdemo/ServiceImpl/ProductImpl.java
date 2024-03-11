@@ -61,9 +61,9 @@ public class ProductImpl implements ProductService {
     }
 
     @Override
-    public Product findById(int id) throws UserException {
+    public ResponseEntity<Object> findById(int id) throws UserException {
         Product product = productRepository.findById(id).orElseThrow(()->new UserException("not found"));
-      return product;
+        return ResponseUtil.returnResponse(new StatusDto(StatusEnum.SUCCESS, "Products List found", product));
     }
 
     @Override
@@ -90,11 +90,11 @@ public class ProductImpl implements ProductService {
     }
 
     @Override
-    public Product findByName(String name) {
+    public Product findByName(String name) throws UserException {
         Product product = productRepository.findProductsByName(name);
-//        if (product == null) {
-//            return ResponseUtil.returnResponse(new StatusDto(StatusEnum.SUCCESS, name + " not found", null));
-//        }
+        if (product == null) {
+throw new UserException("not found");
+        }
         return product;
     }
 

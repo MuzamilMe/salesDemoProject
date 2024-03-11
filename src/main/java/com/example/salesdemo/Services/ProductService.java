@@ -14,10 +14,10 @@ public interface ProductService {
     ResponseEntity<Object> update(ProductDTO dto) throws UserException;
 
     ResponseEntity<Object> findAll();
-    Product findById(int id) throws UserException;
+    ResponseEntity<Object> findById(int id) throws UserException;
 
     ResponseEntity<Object> productsByCategory(String Category);
-   Product findByName(String name);
+   Product findByName(String name) throws UserException;
 
     ResponseEntity<Object> findProductsBylessQty(int qty);
 

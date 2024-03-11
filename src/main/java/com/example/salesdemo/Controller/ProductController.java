@@ -30,7 +30,7 @@ public class ProductController {
         return service.delete(name);
     }
     @GetMapping(value = "/getByName/{name}")
-    public Product getByName(@PathVariable String name) {
+    public Product getByName(@PathVariable String name) throws UserException {
         return service.findByName(name);
     }
     @PutMapping(value = "/update")
@@ -54,7 +54,7 @@ public class ProductController {
     }
 
     @GetMapping("/getById/{id}")
-    public Product getById(@PathVariable int id) throws UserException {
+    public ResponseEntity<Object> getById(@PathVariable int id) throws UserException {
         return service.findById(id);
     }
 }
