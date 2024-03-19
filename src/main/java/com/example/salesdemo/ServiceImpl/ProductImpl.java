@@ -106,4 +106,13 @@ throw new UserException("not found");
         }
         return ResponseUtil.returnResponse(new StatusDto(StatusEnum.SUCCESS, "Products less than or equals to " + qty, list));
     }
+    @Override
+    public ResponseEntity<Object> productCategories(){
+        List<Object> list = productRepository.findDistinctByCategory();
+        if (list.isEmpty()) {
+            return ResponseUtil.returnResponse(new StatusDto(StatusEnum.SUCCESS, "No product Categories", null));
+        }
+        return ResponseUtil.returnResponse(new StatusDto(StatusEnum.SUCCESS,"" ,list));
+
+    }
 }

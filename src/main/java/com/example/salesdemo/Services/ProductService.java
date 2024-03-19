@@ -21,4 +21,5 @@ public interface ProductService {
 
     ResponseEntity<Object> findProductsBylessQty(int qty);
 
+    ResponseEntity<Object> productCategories();
 }

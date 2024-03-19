@@ -57,4 +57,8 @@ public class ProductController {
     public ResponseEntity<Object> getById(@PathVariable int id) throws UserException {
         return service.findById(id);
     }
+    @GetMapping("/getCategoriesOnly")
+    public ResponseEntity<Object> getCategories()  {
+        return service.productCategories();
+    }
 }
