@@ -46,10 +46,12 @@ public class ProductImpl implements ProductService {
         if (dto.getName() == null) {
             throw new UserException("Missing params");
         }
-        Product entity = productRepository.findProductsByName(dto.getName());
-        if (entity.getName() == null) {
+        Product entity = ProductTransformer.toEntity(dto);
+//        entity = productRepository.findById(entity.getId());
+        if (entity == null) {
             throw new UserException(dto.getName() + " Not found");
         }
+
         dto = ProductTransformer.toDTO(productRepository.save(ProductTransformer.toUpdate(entity, dto)));
         return ResponseUtil.returnResponse(new StatusDto(StatusEnum.SUCCESS, "Product Updated", dto));
 
@@ -62,7 +64,7 @@ public class ProductImpl implements ProductService {
 
     @Override
     public ResponseEntity<Object> findById(int id) throws UserException {
-        Product product = productRepository.findById(id).orElseThrow(()->new UserException("not found"));
+        Product product = productRepository.findById(id).orElseThrow(() -> new UserException("not found"));
         return ResponseUtil.returnResponse(new StatusDto(StatusEnum.SUCCESS, "Products List found", product));
     }
 
@@ -93,7 +95,7 @@ public class ProductImpl implements ProductService {
     public Product findByName(String name) throws UserException {
         Product product = productRepository.findProductsByName(name);
         if (product == null) {
-throw new UserException("not found");
+            throw new UserException("not found");
         }
         return product;
     }
@@ -106,13 +108,14 @@ throw new UserException("not found");
         }
         return ResponseUtil.returnResponse(new StatusDto(StatusEnum.SUCCESS, "Products less than or equals to " + qty, list));
     }
+
     @Override
-    public ResponseEntity<Object> productCategories(){
+    public ResponseEntity<Object> productCategories() {
         List<Object> list = productRepository.findDistinctByCategory();
         if (list.isEmpty()) {
             return ResponseUtil.returnResponse(new StatusDto(StatusEnum.SUCCESS, "No product Categories", null));
         }
-        return ResponseUtil.returnResponse(new StatusDto(StatusEnum.SUCCESS,"" ,list));
+        return ResponseUtil.returnResponse(new StatusDto(StatusEnum.SUCCESS, "", list));
 
     }
 }
