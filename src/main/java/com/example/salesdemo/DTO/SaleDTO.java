@@ -19,6 +19,9 @@ public class SaleDTO {
     private String date;
     private String totalAmount;
     private String qty;
+    private String cName;
+    private String payType;
+
     //relationship
     private List<ProductDTO> ProductDTOS;
 

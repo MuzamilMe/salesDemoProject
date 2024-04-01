@@ -87,4 +87,9 @@ public class SaleImpl implements SaleService {
         return sales;
     }
 
+    @Override
+    public List<Sale> findAll() {
+        return salesRepository.findAll();
+    }
+
 }

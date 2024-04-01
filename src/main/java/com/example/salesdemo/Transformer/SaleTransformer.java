@@ -26,10 +26,17 @@ public class SaleTransformer {
         if (dto.getQty() != null) {
             sale.setQty(Double.valueOf(dto.getQty()));
         }
+        if(dto.getCName()!=null){
+            sale.setCName(dto.getCName());
+        }
+        if(dto.getPayType()!=null){
+            sale.setPayType(dto.getPayType());
+        }
         //relationship Entity
         if (dto.getProductDTOS() != null) {
             sale.setProducts(ProductTransformer.toEntity(dto.getProductDTOS()));
         }
+
         return sale;
     }
 
@@ -55,6 +62,12 @@ public class SaleTransformer {
         }
         if (sale.getQty() != null) {
             dto.setQty(sale.getQty().toString());
+        }
+        if(sale.getCName()!=null){
+            dto.setCName(sale.getCName());
+        }
+        if(sale.getPayType()!=null){
+            dto.setPayType(sale.getPayType());
         }
         //relationship DTO
         if (sale.getProducts() != null) {

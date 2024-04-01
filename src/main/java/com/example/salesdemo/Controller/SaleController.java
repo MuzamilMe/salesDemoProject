@@ -34,6 +34,9 @@ public class SaleController {
 //        LocalDate  d1 = LocalDate.parse(date, df);
         return service.findByDate(date);
     }
-
+    @GetMapping(value = "/Sales")
+    public List<Sale> saleAll()  {
+        return service.findAll();
+    }
 
 }

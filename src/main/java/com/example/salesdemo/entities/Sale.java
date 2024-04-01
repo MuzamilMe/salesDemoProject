@@ -26,6 +26,10 @@ public class Sale {
     private LocalDate date;
     @Column(name = "Sales_Quantity")
     private Double qty;
+    @Column(name = "Customer_Name")
+    private String cName;
+    @Column(name = "Payement_Type")
+    private String payType;
 
     //relationship
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.DETACH})

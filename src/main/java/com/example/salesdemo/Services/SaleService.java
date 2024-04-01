@@ -13,4 +13,5 @@ public interface SaleService {
     ResponseEntity<Object> todaysSale() throws UserException;
 
     List<Sale> findByDate(String Date);
+    List<Sale> findAll();
 }
