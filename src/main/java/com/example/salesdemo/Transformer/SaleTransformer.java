@@ -89,7 +89,7 @@ public class SaleTransformer {
 
     /**
      * @param sale it returns order null
-     *              user where we have already order data
+     *              User where we have already order data
      * @return
      */
 //    public static SaleDTO toDTONew(Sale sale) {
